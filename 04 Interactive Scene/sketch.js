@@ -2,6 +2,7 @@
 // Mitsal Idris
 // Sept. 16, 2024
 //
+let land = 0;
 let clouds = 0;
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -9,7 +10,7 @@ function setup() {
 
 // Background for the program
 function draw() {
-  if(mouseX > windowWidth*.75){
+  if(mouseX > windowWidth*.5){
     background(60, 90, 120);
   }
   else  background(60, 90, 140);
@@ -42,12 +43,13 @@ function draw() {
  }
 
  if(clouds===2){
-  fill(170,170,170);
-  rect(windowWidth*.4, windowHeight*.08, windowHeight*.2,windowWidth*.03, 30);
-  rect(windowWidth*.2, windowHeight*.2, windowHeight*.2,windowWidth*.04, 30);
-  rect(windowWidth*.6, windowHeight*.4, windowHeight*.2,windowWidth*.04, 30);
-  rect(windowWidth*.1, windowHeight*.1, windowHeight*.2,windowWidth*.05, 30);
+  fill(100,100,100);
+  rect(windowWidth*.6, windowHeight*.08, windowHeight*.2,windowWidth*.05, 30);
+  rect(windowWidth*.1, windowHeight*.2, windowHeight*.2,windowWidth*.02, 30);
+  rect(windowWidth*.4, windowHeight*.4, windowHeight*.2,windowWidth*.01, 30);
+  rect(windowWidth*.3, windowHeight*.1, windowHeight*.2,windowWidth*.04, 30);
  }
+ if(land===0)
 }
 
 function mouseClicked(){
@@ -57,4 +59,11 @@ function mouseClicked(){
   }
   
 
+}
+
+function keyReleased(){
+  land += 1
+  if(land === 3){
+    land -= 3
+  }
 }
