@@ -4,6 +4,7 @@
 //
 let land = 0;
 let clouds = 0;
+var currentBack = 0;
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
@@ -26,6 +27,7 @@ function draw() {
   fill(119, 221, 119);
   ellipse(windowWidth*.7, windowHeight, windowHeight*3, windowWidth*.15);  
   
+  //change the clouds of the scene
  if(clouds===0){
     fill(255,255,255);
   rect(windowWidth*.5, windowHeight*.2, windowHeight*.2,windowWidth*.05, 30);
@@ -49,18 +51,52 @@ function draw() {
   rect(windowWidth*.4, windowHeight*.4, windowHeight*.2,windowWidth*.01, 30);
   rect(windowWidth*.3, windowHeight*.1, windowHeight*.2,windowWidth*.04, 30);
  }
- if(land===0)
+ 
+ //change the land of the scene
+ if(land===0){
+  fill(60, 130, 60);
+  ellipse(windowWidth*.9, windowHeight, windowHeight*2, windowWidth*.3);
+  fill(90, 160, 90);
+  ellipse(windowWidth*.15, windowHeight, windowHeight*1.8, windowWidth*.25);
+  fill(119, 221, 119);
+  ellipse(windowWidth*.7, windowHeight, windowHeight*3, windowWidth*.15); 
+ } 
+if(land===1){
+  fill(100, 50, 30);
+  ellipse(windowWidth*.9, windowHeight, windowHeight*2, windowWidth*.3);
+  fill(120, 80, 50);
+  ellipse(windowWidth*.15, windowHeight, windowHeight*1.8, windowWidth*.25);
+  fill(150, 100, 70);
+  ellipse(windowWidth*.7, windowHeight, windowHeight*3, windowWidth*.15);  
+  
+ }
+ if(land===2){
+  fill(140, 100, 40);
+  ellipse(windowWidth*.9, windowHeight, windowHeight*2, windowWidth*.3);
+  fill(190, 130, 70);
+  ellipse(windowWidth*.15, windowHeight, windowHeight*1.8, windowWidth*.25);
+  fill(200, 160, 100);
+  ellipse(windowWidth*.7, windowHeight, windowHeight*3, windowWidth*.15);  
+ }
+
+ //my name in the program
+fill(0);
+text("Mitsaal Idris", windowWidth*.9, windowHeight*.95);
+textSize(30);
 }
 
+//function middleClicked(e2){
+
+//}
+//mouse interact
 function mouseClicked(){
   clouds += 1
   if(clouds === 3){
     clouds -= 3
   }
-  
-
 }
 
+//any key interact
 function keyReleased(){
   land += 1
   if(land === 3){
