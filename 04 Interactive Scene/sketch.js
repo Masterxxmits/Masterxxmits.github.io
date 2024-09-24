@@ -2,6 +2,8 @@
 // Mitsal Idris
 // Sept. 16, 2024
 //
+
+// variables and lets
 let land = 0;
 let clouds = 0;
 var currentBack = 0;
@@ -11,13 +13,9 @@ function setup() {
 
 // Background for the program
 function draw() {
-  if(mouseX > windowWidth*.5){
-    background(60, 90, 120);
-  }
-  else  background(60, 90, 140);
+  bg()
 
 // Landscape for program
-  
   fill(220, 170, 0);
   circle(mouseX, mouseY, 100);
   fill(60, 130, 60);
@@ -79,16 +77,13 @@ if(land===1){
   ellipse(windowWidth*.7, windowHeight, windowHeight*3, windowWidth*.15);  
  }
 
- //my name in the program
+ // my name in the program
 fill(0);
 text("Mitsaal Idris", windowWidth*.9, windowHeight*.95);
 textSize(30);
 }
 
-//function middleClicked(e2){
-
-//}
-//mouse interact
+// mouse interact
 function mouseClicked(){
   clouds += 1
   if(clouds === 3){
@@ -96,10 +91,34 @@ function mouseClicked(){
   }
 }
 
-//any key interact
+// any key interact
 function keyReleased(){
   land += 1
   if(land === 3){
     land -= 3
+  }
+}
+
+// change the sky of the program
+function mousePressed(){
+  if(mouseButton === CENTER && currentBack < 2){
+  currentBack += 1
+  }
+  else if(currentBack === 2){
+    currentBack -= 2
+  }
+
+}
+
+// the color of the sky in the program
+function bg(){
+  if(currentBack===0){
+    background(30,60,110)
+  }
+  else if(currentBack===1){
+    background(60,90,140)
+  }
+  else if(currentBack===2){
+    background(100,130,180)
   }
 }
