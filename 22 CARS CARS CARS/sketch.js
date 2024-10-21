@@ -4,9 +4,11 @@
 
 let lineA = 0;
 let lineB = 20;
+let myCar;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
 }
 
 function draw() {
@@ -36,6 +38,9 @@ class Vehicle{
     this.color = color(random(255), random(255), random(255));
     this.direction = direction;
     this.xSpeed = random(1,200);
-
+    this.cars = [];
   }
+
 }
+
+  
