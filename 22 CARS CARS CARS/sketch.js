@@ -7,9 +7,12 @@ let lineB = 20;
 let myCar;
 let eastbound = [];
 let westbound = [];
+let light;
+let count;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  count = 0;
 
 }
 
@@ -28,7 +31,7 @@ function drawRoad(){
   fill(0);
   noStroke();
   rect(0,height/2.5, height,250);
-  stroke(255);
+  stroke(255,255,0);
   strokeWeight(3);
   while(lineA < width){
     line(lineA, height/1.9, lineB, height/1.9);
@@ -61,7 +64,12 @@ class Vehicle{
   action(){
     this.move();
     this.display();
+    this.speedUp();
+    this.speedDown();
+    this.changeColor();
+    this.trafficLight();
   }
+
   display(){
     if (this.type===0){
       this.drawCar();
@@ -70,13 +78,14 @@ class Vehicle{
       this.drawTruck();
     }
   }
-
   
   drawCar(){
+    stroke(0);
     fill(this.color);
     rect(this.x,this.y,100,40);
   }
   drawTruck(){
+    stroke(0);
     fill(this.color);
     ellipse(this.x,this.y,100,40);
   }
@@ -93,20 +102,53 @@ class Vehicle{
       if(this.x < 0){
         this.x  = width;
       }
-   }
+    }
   }
   speedUp(){
     if(this.direction === 0){
-      
+      if(random(1,100) >= 100){
+        xSpeed += random(-15, -1);
+      }
     }
-    
+    if(this.direction === 1){
+      if(random(1,100) >= 100){
+        xSpeed += random(1, 15);
+      }
+    }
   }
   speedDown(){
-
+    if(this.direction === 0){
+      if(random(1,100) >= 100){
+        xSpeed -= random(-15, -1);
+      }
+    }
+    if(this.direction === 1){
+      if(random(1,100) >= 100){
+        xSpeed -= random(1, 15);
+      }
+    }
   }
   changeColor(){
-
+    if(random(1,100) >= 100){
+      this.color = color(random(255), random(255),random(255));
+    }
+  }
+  trafficLight(){ 
+    fill("green");
+    circle(width/2,height/3,50);
+    if(keyIsPressed && keyCode === 32){
+      light = 0;
+      if(light === 0){
+        for(let l = 0; l < 5600; l++){
+          fill("red");
+          circle(width/2,height/3,50);
+          
+          
+        }
+      }
+    }
   }
 }
 
   
+ 
