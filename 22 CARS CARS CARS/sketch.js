@@ -2,6 +2,7 @@
 // Mitsaal Idris
 // Oct. 18, 2024
 
+// let statements
 let lineA = 0;
 let lineB = 20;
 let myCar;
@@ -16,6 +17,7 @@ function setup() {
 
 }
 
+//
 function draw() {
   background(220);
   drawRoad();
@@ -27,6 +29,7 @@ function draw() {
   }
 }
 
+//drawing the road
 function drawRoad(){
   fill(0);
   noStroke();
@@ -42,6 +45,7 @@ function drawRoad(){
   lineB = 20;
 }
 
+// how the cars spawn on each side
 function mouseClicked(){
   if (keyIsPressed&&keyCode === SHIFT){
     westbound.push(new Vehicle(0,random(height/2.1,height/2.3),0));
@@ -50,6 +54,7 @@ function mouseClicked(){
     eastbound.push(new Vehicle(width,random(height/1.6,height/1.8),1));
   }
 }
+//the properties of the vehicles
 class Vehicle{
   constructor(x, y, direction){
     this.type = int(random(2));
@@ -60,7 +65,7 @@ class Vehicle{
     this.xSpeed = random(1,15);
    
   }
-
+//calling all the events
   action(){
     this.move();
     this.display();
@@ -69,7 +74,7 @@ class Vehicle{
     this.changeColor();
     this.trafficLight();
   }
-
+//drawing of the car and the truck
   display(){
     if (this.type===0){
       this.drawCar();
@@ -78,7 +83,7 @@ class Vehicle{
       this.drawTruck();
     }
   }
-  
+  //draw the cars and the truck
   drawCar(){
     stroke(0);
     fill(this.color);
@@ -89,7 +94,7 @@ class Vehicle{
     fill(this.color);
     ellipse(this.x,this.y,100,40);
   }
-
+//which side are the cars driving on
   move(){
     if(this.direction === 0){
       this.x += this.xSpeed;
@@ -104,6 +109,7 @@ class Vehicle{
       }
     }
   }
+  //Speeds up the cars
   speedUp(){
     if(this.direction === 0){
       if(random(1,100) >= 100){
@@ -116,6 +122,7 @@ class Vehicle{
       }
     }
   }
+  //slowers speed
   speedDown(){
     if(this.direction === 0){
       if(random(1,100) >= 100){
@@ -128,11 +135,13 @@ class Vehicle{
       }
     }
   }
+  //change the color of the cars 1% chance
   changeColor(){
     if(random(1,100) >= 100){
       this.color = color(random(255), random(255),random(255));
     }
   }
+  //make the cars stop or go (broken light)
   trafficLight(){ 
     fill("green");
     circle(width/2,height/3,50);
@@ -142,8 +151,6 @@ class Vehicle{
         for(let l = 0; l < 5600; l++){
           fill("red");
           circle(width/2,height/3,50);
-          
-          
         }
       }
     }
