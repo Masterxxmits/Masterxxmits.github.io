@@ -65,6 +65,7 @@ class Vehicle{
     this.xSpeed = random(1,15);
    
   }
+
 //calling all the events
   action(){
     this.move();
@@ -94,8 +95,9 @@ class Vehicle{
     fill(this.color);
     ellipse(this.x,this.y,100,40);
   }
-//which side are the cars driving on
+  //which side are the cars driving on
   move(){
+    
     if(this.direction === 0){
       this.x += this.xSpeed;
       if(this.x > width){
@@ -143,19 +145,34 @@ class Vehicle{
   }
   //make the cars stop or go (broken light)
   trafficLight(){ 
+    let framecount = 60;
     fill("green");
     circle(width/2,height/3,50);
     if(keyIsPressed && keyCode === 32){
       light = 0;
       if(light === 0){
-        for(let l = 0; l < 5600; l++){
-          fill("red");
-          circle(width/2,height/3,50);
-        }
+        fill("red");
+        circle(width/2,height/3,50); 
+      
+         
       }
     }
   }
 }
 
-  
- 
+class TrafficLight{
+  constructor(green, red){
+    this.green = green(color(0,255,0));
+    this.red = red(color(255,0,0));
+  }
+  trafficLight(){ 
+    this.green;
+    circle(width/2,height/3,50);
+    if(keyIsPressed && keyCode === 32){
+      for(let l = 0; l < 120; l++){
+        this.red;
+        circle(width/2,height/3,50);
+      }
+    }
+  }
+} 
