@@ -9,21 +9,23 @@ let win = 0;
 let rectWidth, rectHeight;
 let currentRow, currentCol;
 
-let gridData = [[0,0,0,255,0],
-                [255,0,255,0,255],
-                [0,255,0,0,0],
-                [0,0,255,0,255]];
+let grid = [];
+// let gridData = [[0,0,0,255,0],
+//                 [255,0,255,0,255],
+//                 [0,255,0,0,0],
+//                 [0,0,255,0,255]];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectWidth = width / NUM_COLS;
   rectHeight = height / NUM_ROWS;
+  randomizer();
 }
 
 function drawGrid(){
   for (let y = 0; y < NUM_ROWS; y++){
     for (let x = 0; x < NUM_COLS; x++){
-      fill(gridData[y][x]);
+      fill(grid[y][x]);
       rect(x*rectWidth,y*rectHeight,rectWidth,rectHeight);
     }
   }
@@ -49,11 +51,11 @@ function mousePressed(){
 
 function flip(col, row){
   if (col >= 0 && col < NUM_COLS && row >= 0 && row < NUM_ROWS){
-    if (gridData[row][col] === 0){
-      gridData[row][col] = 255;
+    if (grid[row][col] === 0){
+      grid[row][col] = 255;
     }
     else{ 
-      gridData[row][col] = 0;
+      grid[row][col] = 0;
     }
   }
 }
@@ -63,11 +65,12 @@ function draw() {
   determineActiveSquare();
   drawGrid();
   winner();
+  overlay();
 }
 
 function winner(){
-  let firstValue = gridData [0][0];
-  let white = gridData.every(row => row.every( value => value === firstValue ));
+  let firstValue = grid [0][0];
+  let white = grid.every(row => row.every( value => value === firstValue ));
 
   if(white){
     textSize(50);
@@ -77,7 +80,7 @@ function winner(){
     text("YOU WIN!", width/2, height/2);
   }
 
-  let black = gridData.every(row => row.every( value => value === firstValue ));
+  let black = grid.every(row => row.every( value => value === firstValue ));
 
   if(black){
     textSize(50);
@@ -85,4 +88,32 @@ function winner(){
     textAlign(CENTER,CENTER);
     text("YOU WIN!", width/2, height/2);
   }
+}
+
+function randomizer(){
+  for(let i = 0; i < NUM_ROWS; i++){
+    let rowArray = [];
+    for(let i = 0; i < NUM_COLS; i++){
+      r = int(random(0,2));
+      if(r === 0){
+        rowArray.push(0);
+      }
+      else{
+        rowArray.push(255);
+      }
+    }
+    grid.push(rowArray);
+  }
+}
+
+function overlay(){
+  currentRow = int(mouseY / rectHeight);
+  currentCol = int(mouseX / rectWidth);
+  print(currentCol, currentRow);
+  fill(0,100,0);
+  rect(currentCol*rectWidth,currentRow*rectHeight,rectWidth,rectHeight);
+  rect((currentCol+1)*rectWidth,currentRow*rectHeight,rectWidth,rectHeight);
+  rect((currentCol-1)*rectWidth,currentRow*rectHeight,rectWidth,rectHeight);
+  rect(currentCol*rectWidth,(currentRow-1)*rectHeight,rectWidth,rectHeight);
+  rect(currentCol*rectWidth,(currentRow+1)*rectHeight,rectWidth,rectHeight);
 }
