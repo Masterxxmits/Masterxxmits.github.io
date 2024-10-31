@@ -2,7 +2,7 @@
 // Mitsaal Idris
 // Oct. 29, 2024
 
-
+// global variables
 const NUM_ROWS = 4;
 const NUM_COLS = 5;
 let win = 0;
@@ -15,6 +15,7 @@ let grid = [];
 //                 [0,255,0,0,0],
 //                 [0,0,255,0,255]];
 
+//sets up the rectangles
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectWidth = width / NUM_COLS;
@@ -22,6 +23,7 @@ function setup() {
   randomizer();
 }
 
+//draws the grid
 function drawGrid(){
   for (let y = 0; y < NUM_ROWS; y++){
     for (let x = 0; x < NUM_COLS; x++){
@@ -30,16 +32,18 @@ function drawGrid(){
     }
   }
 }
-
+//determines witch squares are active
 function determineActiveSquare(){
   currentRow = int(mouseY / rectHeight);
   currentCol = int(mouseX / rectWidth);
   print(currentCol, currentRow);
 }
+//flips only one of the squares
 function mousePressed(){
   if(keyIsDown(SHIFT)){
     flip(currentCol, currentRow );
   }
+  //flips squares in a cross pattern
   else{
     flip(currentCol, currentRow );
     flip(currentCol-1, currentRow );
@@ -48,7 +52,7 @@ function mousePressed(){
     flip(currentCol, currentRow+1 );
   }
 }
-
+// code for white or black tiles
 function flip(col, row){
   if (col >= 0 && col < NUM_COLS && row >= 0 && row < NUM_ROWS){
     if (grid[row][col] === 0){
@@ -60,6 +64,7 @@ function flip(col, row){
   }
 }
 
+//calls everything
 function draw() {
   background(220);
   determineActiveSquare();
@@ -67,7 +72,7 @@ function draw() {
   winner();
   overlay();
 }
-
+// detects if all tiles are white or black
 function winner(){
   let firstValue = grid [0][0];
   let white = grid.every(row => row.every( value => value === firstValue ));
@@ -89,7 +94,7 @@ function winner(){
     text("YOU WIN!", width/2, height/2);
   }
 }
-
+//randomize the starting position of white and black tiles
 function randomizer(){
   for(let i = 0; i < NUM_ROWS; i++){
     let rowArray = [];
@@ -106,14 +111,15 @@ function randomizer(){
   }
 }
 
+//highlights the affected squares
 function overlay(){
   currentRow = int(mouseY / rectHeight);
   currentCol = int(mouseX / rectWidth);
   print(currentCol, currentRow);
-  fill(0,100,0);
+  fill(0,100,0,150);
   rect(currentCol*rectWidth,currentRow*rectHeight,rectWidth,rectHeight);
   rect((currentCol+1)*rectWidth,currentRow*rectHeight,rectWidth,rectHeight);
   rect((currentCol-1)*rectWidth,currentRow*rectHeight,rectWidth,rectHeight);
   rect(currentCol*rectWidth,(currentRow-1)*rectHeight,rectWidth,rectHeight);
-  rect(currentCol*rectWidth,(currentRow+1)*rectHeight,rectWidth,rectHeight);
+  rect(currentCol*rectWidth,(currentRow+1) *rectHeight,rectWidth,rectHeight);
 }
